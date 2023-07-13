@@ -1,1 +1,20 @@
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 
+prime_index = 1000
+count = 0
+prime_number = 0
+
+N = 2
+while count < prime_index:
+    if is_prime(N):
+        prime_number = N
+        count += 1
+    N += 1
+
+print(prime_number)
