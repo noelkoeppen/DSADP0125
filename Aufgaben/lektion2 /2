@@ -1,1 +1,36 @@
+import random
+
+
+queue = []
+
+for i in range(0, 50):
+    queue.append(random.randint(0, 1000))
+
+
+def ShiftRight(queue):
+    for i in range(0, 25):
+        last = queue[49]
+        queue.insert(0, last)
+        queue.pop()
+    
+    print(queue)
+
+
+def ShiftLeft(queue):
+    for i in range(0, 25):
+        first = queue[0]
+        queue.append(first)
+        queue.pop(0)
+        
+    print(queue)
+
+
+print("Initial queue:")
+print(queue)
+
+print("25 Iterations right shift:")
+ShiftRight(queue)
+
+print("25 iterations left shift:")
+ShiftLeft(queue)
 
