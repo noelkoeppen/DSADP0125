@@ -1,1 +1,14 @@
+import random
 
+stack = []
+print(stack)
+
+
+for i in range(0, 25):
+    stack.append(random.randint(0, 100))
+    print(stack)
+
+
+for i in range(0, 25):
+    stack.pop()
+    print(stack)
