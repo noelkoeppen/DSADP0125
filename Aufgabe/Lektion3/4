@@ -1,0 +1,63 @@
+import random
+
+def Fall1():
+    
+    winCounter = 0      
+    trys = 100000       
+
+   
+    for _ in range(0, trys):
+
+        doors = [0, 0, 0]                   
+        choice = random.randint(0, 2)       
+        winningDoor = random.randint(0, 2)  
+        doors[winningDoor] = 1              
+
+        while(True):
+            openDoor = random.randint(0, 2)
+
+            if(doors[openDoor] == 0 and openDoor != choice):
+                doors[openDoor] = 2
+                break
+         
+        if(doors[choice] == 1):
+            winCounter += 1
+
+    print("Gewinnhäufigkeit für Fall 1:")
+    winProbability = winCounter / trys
+    print(winProbability)
+ 
+def Fall2():
+    
+    winCounter = 0      
+    trys = 100000      
+    
+    for _ in range(0, trys):
+
+        doors = [0, 0, 0]
+        choice = random.randint(0, 2)
+        winningDoor = random.randint(0, 2)
+        doors[winningDoor] = 1
+
+        while(True):
+            openDoor = random.randint(0, 2)
+
+            if(doors[openDoor] == 0 and openDoor != choice):
+                doors[openDoor] = 2
+                break
+         
+        for i in range(0, 3):
+
+            if(i != choice and doors[i] != 2):      
+                choice = i
+                break
+
+        if(doors[choice] == 1):
+            winCounter += 1
+  
+    print("Gewinnhäufigkeit für Fall 2:")
+    winProbability = winCounter / trys
+    print(winProbability)
+
+Fall1()
+Fall2()
