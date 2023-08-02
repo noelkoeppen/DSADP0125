@@ -1,0 +1,27 @@
+import math
+
+# Ticket = 1€  
+# Pool = Hälfte der Einsätze, Einsatz 
+# gleichmäßig auf alle Gewinnklassen verteilt
+
+def CalculateReturn():
+    
+    TICKET_COST = 1.0  # Kosten Ticket
+    PRIZE_POOL = 0.5  # Pool
+    NUMBERS = 49  # Anzahl der Zahlen im Spiel
+    PICKS = 6  # Anzahl der Zahlen, die man auswählt
+
+    # Berechnung der Gesamtzahl der Gewinnkombinationen
+    totalCombinations = math.comb(NUMBERS, PICKS)
+
+    # Berechnung des erwarteten Rücklaufs
+    # Dieser Wert gibt an welchen durschnittlichen Gewinn man bei theoretisch unendlichen Versuchen erwarten kann
+    expectedReturn = (PRIZE_POOL * TICKET_COST) / totalCombinations
+
+    return expectedReturn
+
+print("Erwarteter Rücklauf pro Spielschein: ", CalculateReturn())
+
+# Um diese Berechnung realistischer zu Gestalten müsste man wissen wie die Gewinnquoten verteilt sind.
+# Diese beziehen sich auf die verkauften Tickets und die Anzahl der Gewinner in jeder Kategorie.
+# Man bräuchte also reale Daten von Lotteriegesellschaften und das Modell wäre damit noch um einiges komplexer.
