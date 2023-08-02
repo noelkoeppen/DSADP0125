@@ -1,1 +1,24 @@
+import threading
 
+def calculate_partial_sum(start, end, step, result_list, index):
+    partial_sum = sum(((-1)**i / (2*i + 1)) for i in range(start, end, step))
+    result_list[index] = partial_sum
+
+def calculate_pi_leibniz_two_threads(precision):
+    terms = precision * 10**5
+    result_list = [0, 0]
+    threads = []
+
+    threads.append(threading.Thread(target=calculate_partial_sum, args=(0, terms, 2, result_list, 0)))  
+    threads.append(threading.Thread(target=calculate_partial_sum, args=(1, terms, 2, result_list, 1)))  
+
+    for thread in threads:
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    pi = 4 * sum(result_list)
+    return round(pi, 12)
+
+print(calculate_pi_leibniz_two_threads(100))
