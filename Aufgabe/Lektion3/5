@@ -1,27 +1,41 @@
-import math
+#Entwickeln Sie eine Routine in Python, 
+#welche die Gewinne aus einer 6 aus 49 Lotterie berechnet.Wie hoch ist der Anteil, 
+#den man im Mittel bei einer Wiederholung von Spieleinsätzen wiederaus der Lotterie zurück erhält? 
 
-# Ticket = 1€  
-# Pool = Hälfte der Einsätze, Einsatz 
-# gleichmäßig auf alle Gewinnklassen verteilt
+import random
 
-def CalculateReturn():
-    
-    TICKET_COST = 1.0  # Kosten Ticket
-    PRIZE_POOL = 0.5  # Pool
-    NUMBERS = 49  # Anzahl der Zahlen im Spiel
-    PICKS = 6  # Anzahl der Zahlen, die man auswählt
+#def. die anzahl der durchläufe mit kosten und gewinn übertragung
+def lotterie(anzahl):
+    kosten = 0
+    gewinne = 0
+    for _ in range(anzahl):
+        kosten += 2                                                         #kosten pro durchgang
 
-    # Berechnung der Gesamtzahl der Gewinnkombinationen
-    totalCombinations = math.comb(NUMBERS, PICKS)
+        lotterieNummern = random.sample(range(1, 50), 6)                    #zufallszahlen generieren
 
-    # Berechnung des erwarteten Rücklaufs
-    # Dieser Wert gibt an welchen durschnittlichen Gewinn man bei theoretisch unendlichen Versuchen erwarten kann
-    expectedReturn = (PRIZE_POOL * TICKET_COST) / totalCombinations
+        spielerEinsatz = random.sample(range(1, 50), 6)                     #zufallszahlen generieren
 
-    return expectedReturn
+        richtigeZahlen = len(set(lotterieNummern) & set(spielerEinsatz))    #vergleich der zufallszahlen
 
-print("Erwarteter Rücklauf pro Spielschein: ", CalculateReturn())
+        if richtigeZahlen == 6:
+            gewinne += 1000000000
+        elif richtigeZahlen == 5:
+            gewinne += 1000000
+        elif richtigeZahlen == 4:
+            gewinne += 10000                                                #gewinn für den Durchgang
+        elif richtigeZahlen == 3:
+            gewinne += 1000
+        elif richtigeZahlen == 2:
+            gewinne += 10
+        elif richtigeZahlen == 1:
+            gewinne += 1
+        elif richtigeZahlen == 0:
+            gewinne += 0
 
-# Um diese Berechnung realistischer zu Gestalten müsste man wissen wie die Gewinnquoten verteilt sind.
-# Diese beziehen sich auf die verkauften Tickets und die Anzahl der Gewinner in jeder Kategorie.
-# Man bräuchte also reale Daten von Lotteriegesellschaften und das Modell wäre damit noch um einiges komplexer.
+    gewinneProzentual = gewinne / kosten
+    return gewinneProzentual
+
+
+anzahlTeilnahmen = lotterie(100)                                           #anzahl der durchgänge
+
+print(f"{anzahlTeilnahmen:.2f}%")                                          #ausgabe mit 2 stelligen Float
